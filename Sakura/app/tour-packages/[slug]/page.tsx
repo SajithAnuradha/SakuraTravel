@@ -4,9 +4,14 @@ import { notFound } from "next/navigation";
 import { TOURS } from "@/content/tours";
 import { InquiryButton } from "@/components/forms/InquiryButton";
 
-export default function TourDetailPage({ params }: { params: { slug: string } }) {
-  const tour = TOURS.find((t) => t.slug === params.slug);
-  if (!tour) return notFound();
+export default async function TourDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const tour = TOURS.find((t) => t.slug === slug);
+  if (!tour) notFound();
 
   return (
     <main className="max-w-4xl mx-auto px-4 py-10">

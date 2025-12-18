@@ -4,14 +4,15 @@ import { TOURS } from "@/content/tours";
 import { TourFilters } from "@/components/tours/TourFilters";
 import { InquiryButton } from "@/components/forms/InquiryButton";
 
-export default function TourPackagesPage({
+export default async function TourPackagesPage({
   searchParams,
 }: {
-  searchParams?: { price?: string; days?: string; type?: string };
+  searchParams?: Promise<{ price?: string; days?: string; type?: string }>;
 }) {
-  const price = searchParams?.price;
-  const days = searchParams?.days;
-  const type = searchParams?.type;
+  const resolvedSearchParams = await searchParams;
+  const price = resolvedSearchParams?.price;
+  const days = resolvedSearchParams?.days;
+  const type = resolvedSearchParams?.type;
 
   const filtered = TOURS.filter((t) => {
     if (price && t.priceRange !== price) return false;
