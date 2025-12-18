@@ -1,5 +1,5 @@
 export const SITE = {
-  name: "Client Travels",
+  name: "Sakura Travels",
   tagline: "The world in comfort",
   phone: "+94 77 397 0046",
   email: "travels@example.com",
